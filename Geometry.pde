@@ -1,26 +1,17 @@
-// class Feature {
-//   Geometry geoMetry;
-
-//   Feature(String type_, JSONObject geometryJsonArray) {
-//     type = type_;
-//     y = y_;
-//     diameter = diameter_;
-//     name = s;
-//   }
-// }
-
 class Geometry {
-    String type;
-    float lat;
-    float lon;
+  String type;
+  ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 
-    Geometry(String type_, JSONArray coordinates_) {
-      type = type_;
-      JSONArray values = coordinates_.getJSONArray(0);
-
-      for (int i = 0; i < values.size(); i++) {
-        lon = values.getFloat(0);
-        lat = values.getFloat(1);
-      }
+  Geometry(String type_, JSONArray coordinatesJSONArray) {
+    type = type_;
+    for (int i = 0; i < coordinatesJSONArray.size(); i++) {
+      JSONArray coordinateJSONArray = coordinatesJSONArray.getJSONArray(i);
+      
+      float lon = coordinateJSONArray.getFloat(0);
+      float lat = coordinateJSONArray.getFloat(1);
+      Coordinate coordinate = new Coordinate(lat, lon);
+      
+      coordinates.add(coordinate);
     }
   }
+}
